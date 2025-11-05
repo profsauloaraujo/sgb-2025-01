@@ -28,16 +28,14 @@ public class LivroPesquisarRota extends VerticalLayout implements AfterNavigatio
 		add(titulo);
 
 		grade = new Grid<>(LivroResumo.class, false);
-		grade.addComponentColumn(this::link).setHeader("ISBN");
+		grade.addComponentColumn(this::link).setHeader("ISBN");		
 		grade.addColumn("titulo").setHeader("Título");
 		add(grade);
 	}
 
 	private RouterLink link(LivroResumo resumo) {
 		var id = resumo.getId();
-		var titulo = resumo.getTitulo();
-
-		return new RouterLink(titulo, LivroEditarRota.class, id);
+		return new RouterLink(id, LivroEditarRota.class, id);
 	}
 
 	@Override

@@ -57,11 +57,11 @@ interface LivroJpaRepository extends JpaRepository<LivroJpa, String> {
                    COUNT(e)           AS exemplaresDisponiveis,
 			       SIZE(l.exemplares) AS totalExemplares
 			  FROM LivroJpa     l
-	    JOIN FETCH l.autores    a
+	          JOIN l.autores    a
          LEFT JOIN l.exemplares e
                 ON e.emprestimo IS NULL	    
 			 WHERE INDEX(a) = 0
-          GROUP BY l
+          GROUP BY l, a
           ORDER BY l.titulo
 			""")
 	// @formatter:on	
