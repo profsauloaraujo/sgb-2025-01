@@ -10,3 +10,5 @@ src-gen
 *.db
 
 **/src/main/frontend
+
+**/node_modules
