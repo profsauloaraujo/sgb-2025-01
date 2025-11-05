@@ -26,7 +26,7 @@ import dev.sauloaraujo.sgb.dominio.acervo.livro.LivroServico;
 import dev.sauloaraujo.sgb.dominio.evento.EventoBarramento;
 
 @SpringBootApplication
-public class AplicacaoVaadin {
+public class VaadinAplicacao {
 	@Bean
 	public AutorServico autorServico(AutorRepositorio repositorio) {
 		return new AutorServico(repositorio);
@@ -70,6 +70,6 @@ public class AplicacaoVaadin {
 	}
 
 	public static void main(String[] args) throws IOException {
-		run(AplicacaoVaadin.class, args);
+		run(VaadinAplicacao.class, args);
 	}
 }

@@ -28,7 +28,7 @@ public class LivroPesquisarRota extends VerticalLayout implements AfterNavigatio
 		add(titulo);
 
 		grade = new Grid<>(LivroResumo.class, false);
-		grade.addComponentColumn(this::link).setHeader("ISBN");		
+		grade.addComponentColumn(this::link).setHeader("ISBN");
 		grade.addColumn("titulo").setHeader("Título");
 		add(grade);
 	}

@@ -12,3 +12,5 @@ src-gen
 **/src/main/frontend
 
 **/node_modules
+**/src/main/angular/node
+**/src/main/resources/static
