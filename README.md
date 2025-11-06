@@ -16,3 +16,5 @@ A máquina onde o build será executado precisar conter:
 Após realizar o build, você pode executar o sistema com o comando:
 
 `docker compose -f docker-compose-sgb.yml up`
+
+Para acessar o sistema, visite o endereço http://localhost:8080
