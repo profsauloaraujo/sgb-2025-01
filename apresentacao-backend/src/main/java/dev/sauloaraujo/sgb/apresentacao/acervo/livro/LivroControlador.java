@@ -18,6 +18,7 @@ import dev.sauloaraujo.sgb.apresentacao.BackendMapeador;
 import dev.sauloaraujo.sgb.apresentacao.acervo.livro.LivroFormulario.LivroDto;
 import dev.sauloaraujo.sgb.dominio.acervo.exemplar.EmprestimoServico;
 import dev.sauloaraujo.sgb.dominio.acervo.livro.Isbn;
+import dev.sauloaraujo.sgb.dominio.acervo.livro.IsbnFabrica;
 import dev.sauloaraujo.sgb.dominio.acervo.livro.Livro;
 import dev.sauloaraujo.sgb.dominio.acervo.livro.LivroServico;
 import dev.sauloaraujo.sgb.dominio.administracao.socio.SocioId;
@@ -51,6 +52,22 @@ class LivroControlador {
 	@RequestMapping(method = POST, path = "salvar")
 	void salvar(@RequestBody LivroDto dto) {
 		dto.id = null;
+		var livro = mapeador.map(dto, Livro.class);
+		livroServico.salvar(livro);
+	}
+
+	@RequestMapping(method = GET, path = "{id}/edicao")
+	LivroFormulario edicao(@PathVariable String id) {
+		var isbn = new IsbnFabrica().construir(id);
+		var livro = livroServico.obter(isbn);
+		var dto = mapeador.map(livro, LivroDto.class);
+		var autores = autorServicoConsulta.pesquisarResumos();
+		return new LivroFormulario(dto, autores);
+	}
+	
+	@RequestMapping(method = POST, path = "{id}/salvar")
+	void salvar(@PathVariable String id, @RequestBody LivroDto dto) {
+		dto.id = id;
 		var livro = mapeador.map(dto, Livro.class);
 		livroServico.salvar(livro);
 	}

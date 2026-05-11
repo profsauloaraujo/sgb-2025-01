@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, ResolveData, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, ResolveData, RouterModule, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-livro-pesquisa',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './livro-pesquisa.html',
   styleUrl: './livro-pesquisa.css',
 })

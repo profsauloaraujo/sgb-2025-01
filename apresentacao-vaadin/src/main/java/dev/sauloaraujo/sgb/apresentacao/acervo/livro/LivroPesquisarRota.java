@@ -10,7 +10,7 @@ import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 
-import dev.sauloaraujo.sgb.aplicacao.acervo.livro.LivroResumo;
+import dev.sauloaraujo.sgb.aplicacao.acervo.livro.LivroResumoExpandido;
 import dev.sauloaraujo.sgb.aplicacao.acervo.livro.LivroServicoAplicacao;
 import jakarta.annotation.PostConstruct;
 
@@ -20,27 +20,30 @@ public class LivroPesquisarRota extends VerticalLayout implements AfterNavigatio
 
 	private @Autowired LivroServicoAplicacao servico;
 
-	private Grid<LivroResumo> grade;
+	private Grid<LivroResumoExpandido> grade;
 
 	@PostConstruct
 	private void configurar() {
 		var titulo = new H1("Livros");
 		add(titulo);
 
-		grade = new Grid<>(LivroResumo.class, false);
+		grade = new Grid<>(LivroResumoExpandido.class, false);
 		grade.addComponentColumn(this::link).setHeader("ISBN");
-		grade.addColumn("titulo").setHeader("Título");
+		grade.addColumn("livro.titulo").setHeader("Título");
+		grade.addColumn("autor.nome").setHeader("Autor");
+		grade.addColumn("exemplaresDisponiveis").setHeader("Exemplares disponíveis");
+		grade.addColumn("totalExemplares").setHeader("Total de exemplares");
 		add(grade);
 	}
 
-	private RouterLink link(LivroResumo resumo) {
-		var id = resumo.getId();
-		return new RouterLink(id, LivroEditarRota.class, id);
+	private RouterLink link(LivroResumoExpandido resumo) {
+		var id = resumo.getLivro().getId();
+		return new RouterLink(id, LivroEdicaoRota.class, id);
 	}
 
 	@Override
 	public void afterNavigation(AfterNavigationEvent event) {
-		var livros = servico.pesquisarResumos();
+		var livros = servico.pesquisarResumosExpandidos();
 		grade.setItems(livros);
 	}
 }

@@ -1,20 +1,26 @@
 <div class="container">
-    <div class="row pt-5">
+    <div class="row my-5">
         <div class="col">
             <h1>Livros</h1>
 
             <table class="mt-5 table table-bordered table-hover table-small">
                 <thead>
                     <tr>
+                        <th>ISBN</th>
                         <th>Título</th>
                         <th>Autor</th>
-                        <th>Total de exemplares</th>
                         <th>Exemplares disponíveis</th>
+                        <th>Total de exemplares</th>
                     </tr>
                 </thead>
                 <tbody>
                     @for (resumo of recurso; track resumo.livro.id) {
                     <tr>
+                        <td>
+                            <a [routerLink]="['/livro', resumo.livro.id, 'edicao']">
+                                {{ resumo.livro.id }}
+                            </a>
+                        </td>
                         <td>
                             {{ resumo.livro.titulo }}
                             @if (resumo.livro.subtitulo) {
@@ -23,8 +29,8 @@
                             }
                         </td>
                         <td>{{ resumo.autor.nome }}</td>
-                        <td>{{ resumo.totalExemplares }}</td>
                         <td>{{ resumo.exemplaresDisponiveis }}</td>
+                        <td>{{ resumo.totalExemplares }}</td>
                     </tr>
                     }
                 </tbody>

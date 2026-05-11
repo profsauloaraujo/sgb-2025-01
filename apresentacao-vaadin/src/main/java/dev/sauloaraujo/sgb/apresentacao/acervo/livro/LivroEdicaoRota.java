@@ -22,8 +22,8 @@ import dev.sauloaraujo.sgb.dominio.acervo.livro.IsbnFabrica;
 import dev.sauloaraujo.sgb.dominio.acervo.livro.LivroServico;
 import jakarta.annotation.PostConstruct;
 
-@Route("livro/alterar")
-public class LivroEditarRota extends VerticalLayout implements HasUrlParameter<String> {
+@Route("livro/edicao")
+public class LivroEdicaoRota extends VerticalLayout implements HasUrlParameter<String> {
 	private static final long serialVersionUID = -405348699654790564L;
 
 	private @Autowired LivroServico servico;

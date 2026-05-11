@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row my-5">
+        <div class="col">
+            <h1>Edição de livro</h1>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col">
+            <label class="form-label">ISBN</label>
+            <input class="form-control" type="text" readonly [(ngModel)]="recurso.livro.id">
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <div class="col">
+                <label class="form-label">Título</label>
+                <input class="form-control" type="text" [(ngModel)]="recurso.livro.titulo">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <label class="form-label">Subtítulo</label>
+            <input class="form-control" type="text" [(ngModel)]="recurso.livro.subTitulo">
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col">
+            <h2>Autores</h2>
+        </div>
+    </div>
+
+    @for (id of recurso.livro.autores; track $index) {
+    <div class="row mt-3">
+        <div class="col">
+            <label class="form-label">Autor</label>
+            <div class="input-group">
+                <input class="form-control" type="text" readonly [ngModel]="autor(id).nome">
+                <button class="btn btn-danger" type="button" (click)="excluirAutor(id)">
+                    <i class="bi bi-dash"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+
+    <div class="row mt-3">
+        <div class="col">
+            <label class="form-label">Autor</label>
+            <div class="input-group">
+                <input class="form-control" type="text" [(ngModel)]="autorSelecionado" [ngbTypeahead]="autores"
+                    [inputFormatter]="autorNome" [resultFormatter]="autorNome" [editable]="false">
+                <button class="btn btn-primary" type="button" (click)="adicionarAutor()">
+                    <i class="bi bi-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-5">
+        <div class="col">
+            <button class="btn btn-secondary" onclick="history.back()">Voltar</button>
+            <button class="btn btn-primary float-end" (click)="salvar()">Salvar</button>
+        </div>
+    </div>
+</div>
